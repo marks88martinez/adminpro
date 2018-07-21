@@ -4,6 +4,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { Usuario } from '../../models/usuario.model';
 import { Router } from '@angular/router';
 // import 'rxjs/add/aperator/map';
+import  'rxjs/Rx';
 
 @Injectable()
 export class UsuarioService {
@@ -80,11 +81,11 @@ export class UsuarioService {
 
   crearUsuario(usuario: Usuario) {
     let url =  URL_SERVICIOS + '/usuario';
-     return this.http.post(url, usuario);
-    //  .map((resp: any) => {
-    //    swal('Usuario creado', usuario.email, 'success');
-    //    return resp.usuario;
-    //   });
+     return this.http.post(url, usuario)
+     .map((resp: any) => {
+       swal('Usuario creado', usuario.email, 'success');
+       return resp.usuario;
+      });
 
   }
 
